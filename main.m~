@@ -1,0 +1,16 @@
+clear
+
+%-- Image Load --%
+I=imread('app.tif');
+
+%- Inversion de l'image -%
+Ib= 255-I;
+
+%-- Recherche des lignes --%
+Lignes = seekLines(I);
+
+%-- Recherche --%
+Colonnes = seekColumns(I, Lignes);
+
+IA = I(35)
+ 
