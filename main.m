@@ -19,3 +19,4 @@ save('Rect.mat','Rectangles','-ascii');
 for i=0:10:90 
     Vecteur(i+1:i+10,1:20) = seek_LandR_Profiles( I,5, Rectangles(2*i+1:2*i+20,1:4) );
 end
+ProfilsMoyen=meanProfiles(Vecteur);
