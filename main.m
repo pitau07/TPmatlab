@@ -20,3 +20,9 @@ Profils = SeekProfiles(I,5,Rectangles);
 
 ProfilsMoyen=meanProfiles(Vecteur);
 
+
+%-- calculer distance euclidienne entre ces vecteurs et ceux des centres
+Distances=distEuclidienne(Vecteur,ProfilsMoyen,5);
+%-- determination de la classe = indice-1 de la distance min 
+[Min,Classes]= min(Distances,[],2);
+Classes=Classes-1;
