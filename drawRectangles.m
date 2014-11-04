@@ -1,4 +1,5 @@
 function [  ] = drawRectangles( I,Rectangles )
+    figure
     imshow(I);
     % Garde l'image actuelle afin d'y ajouter les rectangles
     hold on;

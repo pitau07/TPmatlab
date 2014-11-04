@@ -1,10 +1,10 @@
 function [ Retour ] = SeekProfiles( I, d, Rectangles)
-
-	
-	imshow(I);
+    
+	figure
+    imshow(I);
     hold on
 
-	for g=0:10:90 
+	for g=0:2*d:90 
 		disnumberprofile = zeros(d*2,20);
 		Line = Rectangles(2*g+1:2*g+20,1:4);
 		%pour toute la ligne de chiffres
