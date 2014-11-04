@@ -18,5 +18,5 @@ save('Rect.mat','Rectangles','-ascii');
 %-- Recherche des profils --%
 Profils = SeekProfiles(I,5,Rectangles);
 
-ProfilsMoyen=meanProfiles(Vecteur);
+ProfilsMoyen=meanProfiles(Profils,5);
 
