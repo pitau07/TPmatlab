@@ -1,9 +1,9 @@
-function [ profilsMoyen ] = meanProfiles( Profils , d)
+function [ profilsMoyen ] = meanProfiles( Profils ,d,nbClasses)
     t = size(Profils,1);   
     
     s = size(Profils,2);
     
-    profilsMoyen=zeros(2*d,10);
+    profilsMoyen=zeros(2*d,nbClasses);
    
     k = 1;
     j = 1;

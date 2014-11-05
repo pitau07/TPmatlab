@@ -1,7 +1,7 @@
-function [ Distances ] = distEuclidienne( Profils,Centre,d,nbClasses,nbColonnes )
+function [ Distances ] = distEuclidienne( Profils,Centre,d,nbClasses )
     [l,c]=size(Profils);
     p=1;
-    Distances=zeros(nbColonnes*nbClasses,nbClasses);% Distances size=[200][10]
+    Distances=zeros(c*,nbClasses);% Distances size=[200][10]
     
     % chgt de chiffre toutes les d*2 lignes
    for i=0:2*d:l-2*d
