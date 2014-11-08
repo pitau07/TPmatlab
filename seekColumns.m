@@ -2,7 +2,7 @@ function [ Col ] = seekColumns( I, Lignes )
 
     col=size(I,2);
     lineI=size(Lignes,1);
-    Col = zeros(lineI,40);
+   % Col = zeros(lineI,40);
     
     %- parcours des lignes de I detectées par seekLines
     for j=1:lineI 

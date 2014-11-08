@@ -1,7 +1,7 @@
 function [ Rectangles ] = seekRectangles( I,Lignes,Colonnes )
     nbLignes=size(Lignes,1);
     nbCol=size(Colonnes,2);
-    Rectangles=zeros(200,4);
+   % Rectangles=zeros(200,4);
     k=1;
     
     %- pour chaque chiffre detecte on va definir un rectangle l'englobant

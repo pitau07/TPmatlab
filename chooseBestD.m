@@ -1,7 +1,7 @@
 function chooseBestD( Result,Classes )
     
     t=size(Result,1);
-    taux=zeros();
+    taux=zeros(15,1);
     for d=1:15
         taux(d)=(t-nnz(Result-Classes(:,d)))*100/t;
     end
