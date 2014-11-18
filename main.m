@@ -3,7 +3,11 @@ close all
 
 %parametres
 fileName='test.tif';
-d=5; %remplir avec chooseBestD ?
+d=5;
+
+m=5;
+n=5;
+k=7;
 
 %apprentissage
 %si le fichier centre n'existe pas, il faut le creer
@@ -48,5 +52,20 @@ Classe(1:nbLignes*nbColonnes)=index-1;
 %statistique de reconnaissance 
 drawStat(d,Result,Classe,nbColonnes,nbLignes);
 
+%KPPV
+%apprentissage
+if exist('densite.mat', 'file')~=2
+   apprentissageKPPV;
+end
 
+%recuperation des vecteurs de densite pour chaque nombre
+Densites=zeros(nbLignes*nbColonnes,m*n);
+for i=1:nbLignes*nbColonnes
+    Densites(i,:)=seekDensity(I(Rectangles(i,2):Rectangles(i,4),(Rectangles(i,1):Rectangles(i,3))),m,n);
+end
+
+BaseApprentissage=load('densite.mat','-ascii');
+%recuperation des KPPV
+Temp=seekKPPV(k,Densites,BaseApprentissage);
+KPPV=seekClasse(Temp);
 

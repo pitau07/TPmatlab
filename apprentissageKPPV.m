@@ -1,4 +1,4 @@
-%apprentissage --> construire vecteur caracteristique pour chaque chiffre
+%apprentissage --> construire vecteur densite pour chaque chiffre
 close all
 clear all
 clc
@@ -20,9 +20,10 @@ drawRectangles(I,Rectangles);
 save('Rect.mat','Rectangles','-ascii');
 
 %-- Recherche des vecteurs caracterisqtiques --%
-m=3;
-n=3;
-%nbLignes*nbColonnes
-for i=1:1
-    kee=seekDensity(I(Rectangles(i,2):Rectangles(i,4),(Rectangles(i,1):Rectangles(i,3))),m,n);
+m=5;
+n=5;
+densites=zeros(nbLignes*nbColonnes,m*n);
+for i=1:nbLignes*nbColonnes
+    densites(i,:)=seekDensity(I(Rectangles(i,2):Rectangles(i,4),(Rectangles(i,1):Rectangles(i,3))),m,n);
 end
+save('densite.mat','densites','-ascii');
