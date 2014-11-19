@@ -5,15 +5,15 @@ close all
 fileName='test.tif';
 d=5;
 
-m=5;
-n=5;
+m=3;
+n=4;
 k=7;
 
 %apprentissage
 %si le fichier centre n'existe pas, il faut le creer
-if exist('centre.mat', 'file')~=2
-   apprentissage;
-end
+%if exist('centre.mat', 'file')~=2
+   apprentissage(d);
+%end
 
 
 %-- Image Load --%
@@ -49,23 +49,27 @@ Distances=distEuclidienne(Profils,ProfilsMoyen,d,nbLignes,nbColonnes);
 Classe=zeros(nbLignes*nbColonnes,1);
 Classe(1:nbLignes*nbColonnes)=index-1;
 
-%statistique de reconnaissance 
-drawStat(d,Result,Classe,nbColonnes,nbLignes);
+%-- statistique de reconnaissance 
+drawStat(d,0,0,Result,Classe,nbColonnes,nbLignes);
 
-%KPPV
+%-- KPPV
 %apprentissage
-if exist('densite.mat', 'file')~=2
-   apprentissageKPPV;
-end
+%if exist('densite.mat', 'file')~=2
+   apprentissageKPPV(m,n);
+%end
 
-%recuperation des vecteurs de densite pour chaque nombre
+%-- recuperation des vecteurs de densite pour chaque nombre
 Densites=zeros(nbLignes*nbColonnes,m*n);
 for i=1:nbLignes*nbColonnes
     Densites(i,:)=seekDensity(I(Rectangles(i,2):Rectangles(i,4),(Rectangles(i,1):Rectangles(i,3))),m,n);
 end
 
 BaseApprentissage=load('densite.mat','-ascii');
-%recuperation des KPPV
+%-- recuperation des KPPV
 Temp=seekKPPV(k,Densites,BaseApprentissage);
 KPPV=seekClasse(Temp);
+
+%-- statistique de reconnaissance 
+drawStat(k,m,n,Result,KPPV,nbColonnes,nbLignes);
+
 

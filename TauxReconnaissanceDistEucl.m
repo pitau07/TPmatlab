@@ -2,7 +2,7 @@ clc
 close all
 
 %-- Image Load --%
-I=imread('app.tif');
+I=imread('test.tif');
 
 %-- Recherche des lignes --%
 Lignes = seekLines(I);
@@ -15,21 +15,19 @@ nbColonnes = size(Colonnes,2)/2;
 %-- Recherche des rectangles --%
 Rectangles=seekRectangles(I,Lignes,Colonnes);
 drawRectangles(I,Rectangles);
-save('Rect.mat','Rectangles','-ascii');
 
 %-- Recherche des profils --%
 Classes=zeros(nbLignes*nbColonnes,15);
 
 %le resultat attentu
-Result=zeros(200,1);
+Result=zeros(nbLignes*nbColonnes,1);
 for i=0:9
     Result(i*nbColonnes+1:i*nbColonnes+nbColonnes)=i;
 end
 
 for d=1:15
     Profils = SeekProfiles(I,d,Rectangles,nbLignes,nbColonnes);
-    ProfilsMoyen=meanProfiles(Profils,d,nbLignes);
-    save('centre.mat','ProfilsMoyen','-ascii');
+    ProfilsMoyen=apprentissage(d);
 
     %-- calculer distance euclidienne entre ces vecteurs et ceux des centres
     Distances=distEuclidienne(Profils,ProfilsMoyen,d,nbLignes,nbColonnes);
