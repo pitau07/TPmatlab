@@ -59,14 +59,18 @@ drawStat(d,0,0,Result,Classe,nbColonnes,nbLignes);
 %end
 
 %-- recuperation des vecteurs de densite pour chaque nombre
-Densites=zeros(nbLignes*nbColonnes,m*n);
-for i=1:nbLignes*nbColonnes
-    Densites(i,:)=seekDensity(I(Rectangles(i,2):Rectangles(i,4),(Rectangles(i,1):Rectangles(i,3))),m,n);
-end
+ 
+%Densites=zeros(nbLignes*nbColonnes,m*n);
+%for i=1:nbLignes*nbColonnes
+%    Densites(i,:)=seekDensity(I(Rectangles(i,2):Rectangles(i,4),(Rectangles(i,1):Rectangles(i,3))),m,n);
+%end
+
+Densities = seekDensities(I, nbLignes,nbColonnes, Rectangles, m, n);
+
 
 BaseApprentissage=load('densite.mat','-ascii');
 %-- recuperation des KPPV
-Temp=seekKPPV(k,Densites,BaseApprentissage);
+Temp=seekKPPV(k,Densities,BaseApprentissage);
 KPPV=seekClasse(Temp);
 
 %-- statistique de reconnaissance 

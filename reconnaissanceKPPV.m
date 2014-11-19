@@ -17,9 +17,7 @@ nbColonnes = size(Colonnes,2)/2;
 Rectangles=seekRectangles(I,Lignes,Colonnes);
 drawRectangles(I,Rectangles);
 
-%-- Recherche des profils --%
-
-%le resultat attentu
+%le resultat attendu
 Result=zeros(nbLignes*nbColonnes,1);
 for i=0:9
     Result(i*nbColonnes+1:i*nbColonnes+nbColonnes)=i;

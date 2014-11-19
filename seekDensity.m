@@ -22,4 +22,3 @@ function [ Vecteur ] = seekDensity( I,m,n )
     end
  
 end
-
