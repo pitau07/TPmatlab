@@ -17,7 +17,7 @@ function [ ProfilsMoyen ] = apprentissage(d)
     save('Rect.mat','Rectangles','-ascii');
 
     %-- Recherche des profils --%
-    Profils = SeekProfiles(I,d,Rectangles,nbLignes,nbColonnes);
+    Profils = SeekProfiles(I,d,Rectangles,nbLignes,nbColonnes,0);
     ProfilsMoyen=meanProfiles(Profils,d,nbLignes);
     save('centre.mat','ProfilsMoyen','-ascii');
     

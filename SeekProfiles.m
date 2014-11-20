@@ -1,8 +1,11 @@
-function [ Retour ] = SeekProfiles( I, d, Rectangles,nbLignes,nbColonnes)
+function [ Retour ] = SeekProfiles( I, d, Rectangles,nbLignes,nbColonnes,plot)
     fin=size(Rectangles,1)-nbColonnes;
-	figure
-    imshow(I);
-    hold on
+	
+    if plot == 1
+        figure
+        imshow(I);
+        hold on
+    end
 
 	for g=0:nbColonnes:fin 
 		disnumberprofile = zeros(d*2,nbColonnes);
@@ -25,8 +28,9 @@ function [ Retour ] = SeekProfiles( I, d, Rectangles,nbLignes,nbColonnes)
 	            gauche=k;
 	            
 	            % dessin
-	            plot([Line(i,1),gauche],[pts(j),pts(j)],'Color','r','LineWidth',2);
-	            
+                if plot == 1
+                    plot([Line(i,1),gauche],[pts(j),pts(j)],'Color','r','LineWidth',2);
+                end
 	            
 	            %profil droit
 	            k=Line(i,3);
@@ -36,7 +40,9 @@ function [ Retour ] = SeekProfiles( I, d, Rectangles,nbLignes,nbColonnes)
 	            droite=k;
 	           
 	            % dessin
-	            plot([Line(i,3),droite],[pts(j),pts(j)],'Color','b','LineWidth',2);
+                if plot == 1
+                    plot([Line(i,3),droite],[pts(j),pts(j)],'Color','b','LineWidth',2);
+                end
 	            
 	            disnumberprofile(j,i)=(gauche-Line(i,1))/w;
 	            disnumberprofile(j+d,i)=(Line(i,3)-droite)/w;
