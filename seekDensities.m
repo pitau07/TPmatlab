@@ -1,9 +1,6 @@
 @@ -0,0 +1,72 @@
 function [ Result ] = seekDensities( I,nbLignes,nbColonnes,Rectangles,m,n )
-    close all
     Result=zeros(nbLignes*nbColonnes,m*n);
-    figure
-    
 
     for o=1:nbLignes*nbColonnes
         % Number Cube
@@ -38,6 +35,7 @@ function [ Result ] = seekDensities( I,nbLignes,nbColonnes,Rectangles,m,n )
         Result(o,:) = Vecteur;
     end
 
+    figure
     imshow(I);
     hold on
 
@@ -58,11 +56,8 @@ function [ Result ] = seekDensities( I,nbLignes,nbColonnes,Rectangles,m,n )
      
         for i=1:finCol+1
             for j=1:finLin
-                
                 plot([Rectangles(o,1)+col(j),Rectangles(o,1)+col(j)],[Rectangles(o,2)+1,Rectangles(o,2)+l],'Color','r','LineWidth',2);
-                plot([Rectangles(o,1)+1,Rectangles(o,1)+c],[Rectangles(o,2)+lin(i),Rectangles(o,2)+lin(i)],'Color','r','LineWidth',2);
-                   
-             
+                plot([Rectangles(o,1)+1,Rectangles(o,1)+c],[Rectangles(o,2)+lin(i),Rectangles(o,2)+lin(i)],'Color','r','LineWidth',2); 
             end
         end
     end

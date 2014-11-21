@@ -33,10 +33,10 @@ drawRectangles(I,Rectangles);
 save('Rect.mat','Rectangles','-ascii');
 
 %-- Recherche des profils --%
-Profils = SeekProfiles(I,d,Rectangles,nbLignes,nbColonnes);
+Profils = SeekProfiles(I,d,Rectangles,nbLignes,nbColonnes,0);
 ProfilsMoyen=load('centre.mat','-ascii');
 
-%le resultat attentu
+%le resultat attendu
 Result=zeros(nbLignes*nbColonnes,1);
 for i=0:9
     Result(i*nbColonnes+1:i*nbColonnes+nbColonnes)=i;
@@ -44,6 +44,7 @@ end
 
 %-- calculer distance euclidienne entre ces vecteurs et ceux des centres
 Distances=distEuclidienne(Profils,ProfilsMoyen,d,nbLignes,nbColonnes);
+
 %-- determination de la classe de chaque chiffre = indice-1 de la distance min 
 [~,index]= min(Distances,[],2);
 Classe=zeros(nbLignes*nbColonnes,1);
@@ -59,16 +60,10 @@ drawStat(d,0,0,Result,Classe,nbColonnes,nbLignes);
 %end
 
 %-- recuperation des vecteurs de densite pour chaque nombre
- 
-%Densites=zeros(nbLignes*nbColonnes,m*n);
-%for i=1:nbLignes*nbColonnes
-%    Densites(i,:)=seekDensity(I(Rectangles(i,2):Rectangles(i,4),(Rectangles(i,1):Rectangles(i,3))),m,n);
-%end
-
 Densities = seekDensities(I, nbLignes,nbColonnes, Rectangles, m, n);
 
-
 BaseApprentissage=load('densite.mat','-ascii');
+
 %-- recuperation des KPPV
 Temp=seekKPPV(k,Densities,BaseApprentissage);
 KPPV=seekClasse(Temp);
@@ -76,4 +71,15 @@ KPPV=seekClasse(Temp);
 %-- statistique de reconnaissance 
 drawStat(k,m,n,Result,KPPV,nbColonnes,nbLignes);
 
-
+%-- Combinaison de classifieurs
+ 
+    %-- Par Somme
+    DensitiesSum = Densities .+ Distances;
+    [~,combi1] = max(DensitiesSum, [], 2);
+    resultsum = combi1;
+    
+    %-- Par Produit
+    DensititesProd = Densities .* Distances;
+    [~,combi2] = max(DensitiesSum, [], 2);
+    resultprod = combi2;
+    
