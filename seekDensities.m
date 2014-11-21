@@ -1,3 +1,4 @@
+@@ -0,0 +1,72 @@
 function [ Result ] = seekDensities( I,nbLignes,nbColonnes,Rectangles,m,n )
     close all
     Result=zeros(nbLignes*nbColonnes,m*n);
