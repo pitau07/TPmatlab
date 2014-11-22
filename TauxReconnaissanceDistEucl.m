@@ -25,7 +25,7 @@ for i=0:9
 end
 
 for d=1:15
-    Profils = SeekProfiles(I,d,Rectangles,nbLignes,nbColonnes,0);
+    Profils = SeekProfiles(I,d,Rectangles,nbColonnes,0);
     ProfilsMoyen=apprentissage(d);
 
     %-- calculer distance euclidienne entre ces vecteurs et ceux des centres

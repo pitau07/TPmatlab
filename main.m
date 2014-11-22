@@ -3,10 +3,10 @@ close all
 
 %parametres
 fileName='test.tif';
-d=5;
+d=6;
 
-m=3;
-n=4;
+m=5;
+n=5;
 k=7;
 
 %apprentissage
@@ -33,7 +33,7 @@ drawRectangles(I,Rectangles);
 save('Rect.mat','Rectangles','-ascii');
 
 %-- Recherche des profils --%
-Profils = SeekProfiles(I,d,Rectangles,nbLignes,nbColonnes,0);
+Profils = SeekProfiles(I,d,Rectangles,nbColonnes,1);
 ProfilsMoyen=load('centre.mat','-ascii');
 
 %le resultat attendu
@@ -60,7 +60,7 @@ drawStat(d,0,0,Result,Classe,nbColonnes,nbLignes);
 %end
 
 %-- recuperation des vecteurs de densite pour chaque nombre
-Densities = seekDensities(I, nbLignes,nbColonnes, Rectangles, m, n);
+Densities = seekDensities(I, nbLignes,nbColonnes, Rectangles, m, n,1);
 
 BaseApprentissage=load('densite.mat','-ascii');
 
@@ -74,12 +74,12 @@ drawStat(k,m,n,Result,KPPV,nbColonnes,nbLignes);
 %-- Combinaison de classifieurs
  
     %-- Par Somme
-    DensitiesSum = Densities .+ Distances;
-    [~,combi1] = max(DensitiesSum, [], 2);
-    resultsum = combi1;
+   % DensitiesSum = Densities .+ Distances;
+   % [~,combi1] = max(DensitiesSum, [], 2);
+    %resultsum = combi1;
     
     %-- Par Produit
-    DensititesProd = Densities .* Distances;
-    [~,combi2] = max(DensitiesSum, [], 2);
-    resultprod = combi2;
+   % DensititesProd = Densities .* Distances;
+    %[~,combi2] = max(DensitiesSum, [], 2);
+    %resultprod = combi2;
     
