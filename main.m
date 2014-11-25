@@ -7,7 +7,7 @@ d=6;
 
 m=5;
 n=5;
-k=7;
+k=3;
 
 %apprentissage
 %si le fichier centre n'existe pas, il faut le creer

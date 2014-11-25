@@ -28,29 +28,33 @@ end
 
 KPPV=zeros(nbLignes*nbColonnes,1);
 
-i=1;
-for m=0:10
+i=2;
+taux(1)=0;
+for m=5:5
     %for n=1:10
     n=m;
         Densites=seekDensities(I, nbLignes,nbColonnes, Rectangles, m, n,0);
         BaseApprentissage=apprentissageKPPV(m,n);
-        for k=7:7
+        for k=1:10
             %recuperation des vecteurs de densite pour chaque nombre
             %recuperation des KPPV
             Temp=seekKPPV(k,Densites,BaseApprentissage);
             KPPV(:,k)=seekClasse(Temp);
+            drawStat(k,m,n,Result,KPPV(:,k),nbColonnes,nbLignes);
             taux(i)=(nbLignes*nbColonnes-nnz(Result-KPPV(:,k)))*100/(nbLignes*nbColonnes);
-            
+            i=i+1;
+  
+
         end
-        i=i+1;
+        %i=i+1;
    % end
 end
 
 figure
-plot((0:10).^2,transpose(taux));
-title({'Evolution du taux de reconnaissance en fonction de m*n'});
+plot((0:10),transpose(taux));
+title({'Evolution du taux de reconnaissance en fonction de k avec m=n=5'});
 % Et on nomme les axes
-xlabel('m*n nombre composantes du vecteur caractéristique');
+xlabel('nombre de k plus proches voisins');
 ylabel('taux de reconnaissance des chiffres');
 
 
