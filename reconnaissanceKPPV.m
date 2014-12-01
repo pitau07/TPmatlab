@@ -30,6 +30,8 @@ KPPV=zeros(nbLignes*nbColonnes,1);
 
 i=2;
 taux(1)=0;
+ 
+
 for m=5:5
     %for n=1:10
     n=m;

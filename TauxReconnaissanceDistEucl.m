@@ -17,7 +17,7 @@ Rectangles=seekRectangles(I,Lignes,Colonnes);
 
 %-- Recherche des profils --%
 Classes=zeros(nbLignes*nbColonnes,15);
-
+Classes2=zeros(nbLignes*nbColonnes,15);
 %le resultat attendu
 Result=zeros(nbLignes*nbColonnes,1);
 for i=0:9
@@ -36,5 +36,20 @@ for d=1:15
 end
 
 
-chooseBestD(Result,Classes);
+%chooseBestD(Result,Classes);
+
+
+for d=1:15
+    Profils = SeekProfiles(I,d,Rectangles,nbColonnes,0);
+    ProfilsMoyen=apprentissage(d);
+
+    %-- calculer distance euclidienne entre ces vecteurs et ceux des centres
+    Distances=distanceManhattan(Profils,ProfilsMoyen,d,nbLignes,nbColonnes);
+    %-- determination de la classe de chaque chiffre = indice-1 de la distance min 
+    [~,index]= min(Distances,[],2);
+    Classes2(1:nbLignes*nbColonnes,d)=index-1;
+end
+
+
+chooseBestD(Result,Classes,Classes2);
 
