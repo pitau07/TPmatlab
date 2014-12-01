@@ -72,14 +72,13 @@ KPPV=seekClasse(Temp);
 drawStat(k,m,n,Result,KPPV,nbColonnes,nbLignes);
 
 %-- Combinaison de classifieurs
+    cl1 = probe(Classe);
+    cl2 = probe(KPPV);
  
     %-- Par Somme
-   % DensitiesSum = Densities .+ Distances;
-   % [~,combi1] = max(DensitiesSum, [], 2);
-    %resultsum = combi1;
+    SumCombined = (cl1 + cl2) /2;
     
     %-- Par Produit
-   % DensititesProd = Densities .* Distances;
-    %[~,combi2] = max(DensitiesSum, [], 2);
-    %resultprod = combi2;
-    
+    ProdCombined = cl1.*cl2;
+  
+    %-- Etude des combinaisons de classifieurs
