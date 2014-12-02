@@ -81,4 +81,14 @@ drawStat(k,m,n,Result,KPPV,nbColonnes,nbLignes);
     %-- Par Produit
     ProdCombined = cl1.*cl2;
   
-    %-- Etude des combinaisons de classifieurs
+    %-- Etude des résulats de la combinaison de classifieurs
+    Classifier1 = ptotal(cl1);
+    Classifier2 = ptotal(cl2);
+    Classifer1plus2 = ptotal(SumCombined);
+    Classifier1times2 = ptotal(ProdCombined);
+
+ 
+    
+    
+    
+    
