@@ -45,6 +45,9 @@ end
 %-- calculer distance euclidienne entre ces vecteurs et ceux des centres
 Distances=distEuclidienne(Profils,ProfilsMoyen,d,nbLignes,nbColonnes);
 
+%-- calcul des probabilités d'appartenance aux classes
+Proba1 = distanceToProba(Distances);
+
 %-- determination de la classe de chaque chiffre = indice-1 de la distance min 
 [~,index]= min(Distances,[],2);
 Classe=zeros(nbLignes*nbColonnes,1);
@@ -68,24 +71,14 @@ BaseApprentissage=load('densite.mat','-ascii');
 Temp=seekKPPV(k,Densities,BaseApprentissage);
 KPPV=seekClasse(Temp);
 
+%-- Calcul des probabilités
+Proba2 = neighToProba(Temp,k);
+
 %-- statistique de reconnaissance 
 drawStat(k,m,n,Result,KPPV,nbColonnes,nbLignes);
 
 %-- Combinaison de classifieurs
-    cl1 = probe(Classe);
-    cl2 = probe(KPPV);
- 
-    %-- Par Somme
-    SumCombined = (cl1 + cl2) /2;
-    
-    %-- Par Produit
-    ProdCombined = cl1.*cl2;
-  
-    %-- Etude des résulats de la combinaison de classifieurs
-    Classifier1 = ptotal(cl1);
-    Classifier2 = ptotal(cl2);
-    Classifer1plus2 = ptotal(SumCombined);
-    Classifier1times2 = ptotal(ProdCombined);
+   cl1 = 5;
 
  
     
