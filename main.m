@@ -76,7 +76,7 @@ drawStat(k,m,n,Result,KPPV,nbColonnes,nbLignes);
     cl2 = probe(KPPV);
  
     %-- Par Somme
-    SumCombined = (cl1 + cl2) /2;
+    SumCombined = (cl1 + cl2);% /2;
     
     %-- Par Produit
     ProdCombined = cl1.*cl2;
