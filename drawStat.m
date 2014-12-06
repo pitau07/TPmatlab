@@ -1,4 +1,4 @@
-function drawStat( d,m,n,Result,Classe,nbColonnes,nbLignes )
+function drawStat( d,m,n,operateur,Result,Classe,nbColonnes,nbLignes )
     t=size(Result,1);
     taux=zeros(nbLignes,1);
     for i=0:nbColonnes:t-nbColonnes
@@ -10,7 +10,11 @@ function drawStat( d,m,n,Result,Classe,nbColonnes,nbLignes )
     if m==0
         title({['Taux de reconnaissance par chiffre avec d=',num2str(d)]});
     else
-        title({['Taux de reconnaissance par chiffre avec k=',num2str(d),', m=',num2str(m),', n=',num2str(n)]});
+        if strcmp(operateur,'')   
+            title({['Taux de reconnaissance par chiffre avec k=',num2str(d),', m=',num2str(m),', n=',num2str(n)]});
+        else
+            title({['Taux de reconnaissance par chiffre pour l''operateur ',operateur,' avec k=',num2str(d),', m=',num2str(m),', n=',num2str(n)]});
+        end
     end
         
     % Et on nomme les axes

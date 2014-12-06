@@ -14,7 +14,6 @@ function [ ProfilsMoyen ] = apprentissage(d)
 
     %-- Recherche des rectangles --%
     Rectangles=seekRectangles(I,Lignes,Colonnes);
-    save('Rect.mat','Rectangles','-ascii');
 
     %-- Recherche des profils --%
     Profils = SeekProfiles(I,d,Rectangles,nbColonnes,0);

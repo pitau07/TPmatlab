@@ -15,7 +15,6 @@ nbColonnes = size(Colonnes,2)/2;
 
 %-- Recherche des rectangles --%
 Rectangles=seekRectangles(I,Lignes,Colonnes);
-%drawRectangles(I,Rectangles);
 
 %le resultat attendu
 Result=zeros(nbLignes*nbColonnes,1);
@@ -29,27 +28,21 @@ end
 KPPV=zeros(nbLignes*nbColonnes,1);
 
 i=2;
-taux(1)=0;
+taux=zeros(11,1);
  
 
 for m=5:5
-    %for n=1:10
     n=m;
-        Densites=seekDensities(I, nbLignes,nbColonnes, Rectangles, m, n,0);
-        BaseApprentissage=apprentissageKPPV(m,n);
-        for k=1:10
-            %recuperation des vecteurs de densite pour chaque nombre
-            %recuperation des KPPV
-            Temp=seekKPPV(k,Densites,BaseApprentissage);
-            KPPV(:,k)=seekClasse(Temp);
-            drawStat(k,m,n,Result,KPPV(:,k),nbColonnes,nbLignes);
-            taux(i)=(nbLignes*nbColonnes-nnz(Result-KPPV(:,k)))*100/(nbLignes*nbColonnes);
-            i=i+1;
-  
-
-        end
-        %i=i+1;
-   % end
+    Densites=seekDensities(I, nbLignes,nbColonnes, Rectangles, m, n,0);
+    BaseApprentissage=apprentissageKPPV(m,n);
+    for k=1:10
+        %recuperation des vecteurs de densite pour chaque nombre
+        %recuperation des KPPV
+        Temp=seekKPPV(k,Densites,BaseApprentissage);
+        KPPV(:,k)=seekClasse(Temp);
+        taux(i)=(nbLignes*nbColonnes-nnz(Result-KPPV(:,k)))*100/(nbLignes*nbColonnes);
+        i=i+1;
+    end
 end
 
 figure

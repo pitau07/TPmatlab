@@ -24,6 +24,7 @@ for i=0:9
     Result(i*nbColonnes+1:i*nbColonnes+nbColonnes)=i;
 end
 
+%avec la distance euclidienne
 for d=1:15
     Profils = SeekProfiles(I,d,Rectangles,nbColonnes,0);
     ProfilsMoyen=apprentissage(d);
@@ -35,15 +36,12 @@ for d=1:15
     Classes(1:nbLignes*nbColonnes,d)=index-1;
 end
 
-
-%chooseBestD(Result,Classes);
-
-
+%avec la distance manhattan
 for d=1:15
     Profils = SeekProfiles(I,d,Rectangles,nbColonnes,0);
     ProfilsMoyen=apprentissage(d);
 
-    %-- calculer distance euclidienne entre ces vecteurs et ceux des centres
+    %-- calculer distance manhattan entre ces vecteurs et ceux des centres
     Distances=distanceManhattan(Profils,ProfilsMoyen,d,nbLignes,nbColonnes);
     %-- determination de la classe de chaque chiffre = indice-1 de la distance min 
     [~,index]= min(Distances,[],2);

@@ -1,20 +1,16 @@
 clc
+clear all
 close all
 
 %parametres
 fileName='test.tif';
 d=6;
-
 m=5;
 n=5;
 k=2;
 
 %apprentissage
-%si le fichier centre n'existe pas, il faut le creer
-%if exist('centre.mat', 'file')~=2
-   apprentissage(d);
-%end
-
+apprentissage(d);
 
 %-- Image Load --%
 I=imread(fileName);
@@ -47,6 +43,7 @@ Distances=distEuclidienne(Profils,ProfilsMoyen,d,nbLignes,nbColonnes);
 
 %-- calcul des probabilités d'appartenance aux classes
 Proba1 = distanceToProba(Distances);
+save('probaDist.mat','Proba1','-ascii');
 
 %-- determination de la classe de chaque chiffre = indice-1 de la distance min 
 [~,index]= min(Distances,[],2);
@@ -54,13 +51,11 @@ Classe=zeros(nbLignes*nbColonnes,1);
 Classe(1:nbLignes*nbColonnes)=index-1;
 
 %-- statistique de reconnaissance 
-drawStat(d,0,0,Result,Classe,nbColonnes,nbLignes);
+drawStat(d,0,0,'',Result,Classe,nbColonnes,nbLignes);
 
 %-- KPPV
-%apprentissage
-%if exist('densite.mat', 'file')~=2
-   apprentissageKPPV(m,n);
-%end
+apprentissageKPPV(m,n);
+
 
 %-- recuperation des vecteurs de densite pour chaque nombre
 Densities = seekDensities(I, nbLignes,nbColonnes, Rectangles, m, n,1);
@@ -73,22 +68,23 @@ KPPV=seekClasse(Temp);
 
 %-- Calcul des probabilités
 Proba2 = computeProbaKPPV(Temp,k);
+save('probaKPPV.mat','Proba2','-ascii');
 
 %-- statistique de reconnaissance 
-drawStat(k,m,n,Result,KPPV,nbColonnes,nbLignes);
+drawStat(k,m,n,'',Result,KPPV,nbColonnes,nbLignes);
 
 %-- Combinaison de classifieurs
 
 somme=Proba1+Proba2;
 prod=Proba1.*Proba2;
 
-[~,resultSomme]=max(somme,[],2);
-[~,resultProd]=max(prod,[],2);
+resultSomme=seekClasseFromProba(somme);
+%-- statistique de reconnaissance pour la somme
+drawStat(k,m,n,'somme',Result,resultSomme,nbColonnes,nbLignes);
 
-resultSomme=resultSomme-1;
-drawStat(k,m,n,Result,resultSomme,nbColonnes,nbLignes);
-resultProd=resultProd-1;
-drawStat(k,m,n,Result,resultProd,nbColonnes,nbLignes);
+resultProd=seekClasseFromProba(prod);
+%-- statistique de reconnaissance pour le produit
+drawStat(k,m,n,'produit',Result,resultProd,nbColonnes,nbLignes);
 
  
     

@@ -14,10 +14,8 @@ function [ densites ] = apprentissageKPPV(m,n)
 
     %-- Recherche des rectangles --%
     Rectangles=seekRectangles(I,Lignes,Colonnes);
-    save('Rect.mat','Rectangles','-ascii');
 
     %-- Recherche des vecteurs caracterisqtiques --%
-
     densites=seekDensities(I, nbLignes,nbColonnes, Rectangles, m, n,0);
     save('densite.mat','densites','-ascii');
     
