@@ -7,7 +7,7 @@ fileName='test.tif';
 d=6;
 m=5;
 n=5;
-k=2;
+k=4;
 
 %apprentissage
 apprentissage(d);
@@ -75,7 +75,7 @@ drawStat(k,m,n,'',Result,KPPV,nbColonnes,nbLignes);
 
 %-- Combinaison de classifieurs
 
-somme=Proba1+Proba2;
+somme=(Proba1+Proba2);%/2;
 prod=Proba1.*Proba2;
 
 resultSomme=seekClasseFromProba(somme);
